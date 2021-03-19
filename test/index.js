@@ -1,5 +1,14 @@
 const expross = require('../');
 const app = expross();
+// var router = expross.Router();
+
+// router.use((req,res,next)=>{
+//     console.log("Time:", Date.now())
+// })
+app.use('/good', (req, res, next) => {
+    console.log("Time:", Date.now());
+    next();
+})
 
 app.get('/', function (req, res, next) {
     next();
@@ -7,8 +16,9 @@ app.get('/', function (req, res, next) {
 
     .get('/', function (req, res, next) {
         console.log("before error:")
-        console.log(d)
-        next(new Error('customer error'));
+        next();
+        // console.log(d)
+        // next(new Error('customer error'));
     })
 
     .get('/', function (req, res) {
@@ -16,7 +26,7 @@ app.get('/', function (req, res, next) {
     });
 
 app.get('/good', function (req, res, next) {
-    res.send('get');
+    // res.send('get');
     next();
 }).get('/good', function (req, res, next) {
     res.send('get2');
